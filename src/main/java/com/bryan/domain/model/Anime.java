@@ -1,4 +1,4 @@
-package domain.model;
+package com.bryan.domain.model;
 
 import javax.persistence.*;
 import java.util.UUID;

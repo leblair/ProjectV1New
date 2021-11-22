@@ -1,12 +1,12 @@
-package controller;
+package com.bryan.controller;
 
-import domain.dto.Error;
-import domain.dto.ResponseAnime;
-import domain.model.Anime;
+import com.bryan.domain.dto.Error;
+import com.bryan.domain.dto.ResponseAnime;
+import com.bryan.domain.model.Anime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import repository.AnimeRepository;
+import com.bryan.repository.AnimeRepository;
 
 import java.util.UUID;
 

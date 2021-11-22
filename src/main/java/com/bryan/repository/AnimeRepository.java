@@ -1,6 +1,6 @@
-package repository;
+package com.bryan.repository;
 
-import domain.model.Anime;
+import com.bryan.domain.model.Anime;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

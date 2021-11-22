@@ -1,6 +1,6 @@
-package domain.dto;
+package com.bryan.domain.dto;
 
-import domain.model.Anime;
+import com.bryan.domain.model.Anime;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package domain.dto;
+package com.bryan.domain.dto;
 
 public class Error {
     public String message;

@@ -6,7 +6,7 @@ plugins {
 }
 
 flyway {
-    configFiles = ['src/main/resources/aplication.properties']
+    configFiles = ['src/main/resources/application.properties']
 }
 
 group = 'com.example'
