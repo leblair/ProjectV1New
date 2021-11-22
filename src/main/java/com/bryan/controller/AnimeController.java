@@ -11,7 +11,7 @@ import com.bryan.repository.AnimeRepository;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/anime")
+@RequestMapping("/animes")
 public class AnimeController {
 
  private  final AnimeRepository animeRepository;
