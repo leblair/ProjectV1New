@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bryan.repository.AnimeRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,9 +22,14 @@ public class AnimeController {
         this.animeRepository = animeRepository;
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public ResponseAnime showAnimejson(){
         return new ResponseAnime(animeRepository.findAll());
+    }*/
+
+    @GetMapping("/")
+    public List<Anime> showAnime(){
+        return animeRepository.findAll();
     }
 
     @GetMapping("/{id}")
