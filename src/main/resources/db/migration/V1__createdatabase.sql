@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS anime (
     image text);
 
 
-INSERT INTO anime(description, year, type, image) VALUES
-    ('text1','anime1',2020, 'type1','anime1.jpg'),
-    ('text2','anime2', 2021,'type2','anime2.jpg'),
-    ('text3','anime3',2021,'type3','anime3.jpg'),
-    ('text4','anime4',2020,'type4','anime4.jpg');
+INSERT INTO anime(text,description, type, year, image) VALUES
+    ('text1','anime1','type1', 2020,'anime1.jpg'),
+    ('text2','anime2', 'type2',2021,'anime2.jpg'),
+    ('text3','anime3','type3',2019,'anime3.jpg'),
+    ('text4','anime4','type4',2018,'anime4.jpg');
