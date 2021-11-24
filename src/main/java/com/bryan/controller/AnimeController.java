@@ -46,7 +46,7 @@ public class AnimeController {
     public ResponseEntity<?> createAnime(@RequestBody Anime anime)
     {
         for(Anime a : animeRepository.findAll()){
-            if(a.equals(anime)){
+            if(a.getDescription().equals(anime.getDescription())){
                 //409
                 return ResponseEntity.status(HttpStatus.CONFLICT)
                         .body(Error.message("Ja existeix un anime amb el nom '" + anime.getText() + "'"));
