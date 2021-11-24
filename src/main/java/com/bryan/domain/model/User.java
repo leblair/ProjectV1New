@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 //corresponde a :
-@Table(name = "usuario")
+@Table(name = "usertable")
 public class User {
 
     @Id
@@ -16,28 +16,5 @@ public class User {
     public String username;
     public String password;
 
-    public UUID getUserid() {
-        return userid;
-    }
-
-    public void setUserid(UUID userid) {
-        this.userid = userid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
 

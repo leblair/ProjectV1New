@@ -12,13 +12,24 @@ INSERT INTO anime(text,description, type, year, image) VALUES
     ('text3','anime3','type3',2019,'anime3.jpg'),
     ('text4','anime4','type4',2018,'anime4.jpg');
 
-CREATE TABLE IF NOT EXISTS usuario (
+CREATE TABLE IF NOT EXISTS usertable (
     userid uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     username text,
     password text);
 
-INSERT INTO usuario(username) VALUES
+INSERT INTO usertable(username) VALUES
     ('myuser1'),
     ('myuser2'),
     ('myuser3'),
     ('myuser4');
+
+CREATE TABLE IF NOT EXISTS file (
+        fileid uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+        contenttype text,
+        data bytea);
+
+
+INSERT INTO file(contenttype) VALUES
+    ('image/png'),
+    ('txt'),
+    ('txt');

@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getIndividualAnime(@PathVariable UUID id){
+    public ResponseEntity<?> getUser(@PathVariable UUID id){
         User file = userRepository.findById(id).orElse(null);
 
         if(file==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Error.message("No s'ha trobat l'usuari amb ID: " + id));
@@ -56,6 +56,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(Error.message("No s'ha trobat l'usuari amb id '" + id + "'"));
     }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteUsers(){
+        userRepository.deleteAll();
+        return ResponseEntity.ok().body("Usuaris borrats.");
+    }
+
 
 
 
