@@ -3,6 +3,7 @@ package com.bryan.controller;
 import com.bryan.domain.dto.Error;
 import com.bryan.domain.dto.ResponseAnime;
 import com.bryan.domain.model.Anime;
+import org.aspectj.bridge.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,10 +43,28 @@ public class AnimeController {
 
 
     @PostMapping("/")
-    public Anime createAnime(@RequestBody Anime anime)
+    public ResponseEntity<?> createAnime(@RequestBody Anime anime)
     {
+        for(Anime a : animeRepository.findAll()){
+            if(a.equals(anime)){
+                //409
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body(Error.message("Ja existeix un anime amb el nom '" + anime.getText() + "'"));
+            }
+        }
+        return ResponseEntity.ok().body(animeRepository.save(anime));
+    }
 
-        return animeRepository.save(anime);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAnime(@PathVariable UUID id){
+        for(Anime a: animeRepository.findAll()){
+            if(a.animeid.equals(id)){
+                animeRepository.delete(a);
+                return ResponseEntity.ok().body("S'ha eliminat l'anime amd id '"+ a.animeid + "'");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Error.message("No s'ha trobat l'anime amb id '" + id + "'"));
     }
 
 }
