@@ -23,15 +23,15 @@ public class AnimeController {
         this.animeRepository = animeRepository;
     }
 
-    /*@GetMapping("/")
+    @GetMapping("/")
     public ResponseAnime showAnimejson(){
         return new ResponseAnime(animeRepository.findAll());
-    }*/
-
+    }
+/*
     @GetMapping("/")
     public List<Anime> showAnime(){
         return animeRepository.findAll();
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getIndividualAnime(@PathVariable UUID id){

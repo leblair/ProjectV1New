@@ -6,9 +6,9 @@ import java.util.List;
 
 public class ResponseUser {
 
-    public List<User> result;
+    public List<UserResult> result;
 
-    public ResponseUser(List<User> result){
+    public ResponseUser(List<UserResult> result){
         this.result = result;
     }
 }
