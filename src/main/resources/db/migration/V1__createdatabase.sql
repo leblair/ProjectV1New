@@ -12,6 +12,20 @@ INSERT INTO anime(text,description, type, year, image) VALUES
     ('text3','anime3','type3',2019,'anime3.jpg'),
     ('text4','anime4','type4',2018,'anime4.jpg');
 
+CREATE TABLE IF NOT EXISTS author(
+    authorid uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text,
+    imageurl text
+);
+
+
+CREATE TABLE anime_author(
+    anime uuid REFERENCES anime(animeid) ON DELETE CASCADE,
+    authorid uuid REFERENCES author(authorid) ON DELETE CASCADE,
+    PRIMARY KEY (animeid,authorid)
+
+);
+
 CREATE TABLE IF NOT EXISTS usertable (
     userid uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     username text,

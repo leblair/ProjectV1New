@@ -22,7 +22,7 @@ public class AnimeController {
     public AnimeController(AnimeRepository animeRepository) {
         this.animeRepository = animeRepository;
     }
-
+//hacer proyeccion para evitar un bucle entre atributos
     @GetMapping("/")
     public ResponseAnime showAnimejson(){
         return new ResponseAnime(animeRepository.findAll());

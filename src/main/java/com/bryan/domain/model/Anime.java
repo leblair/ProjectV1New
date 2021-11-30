@@ -1,5 +1,7 @@
 package com.bryan.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -17,6 +19,20 @@ public class Anime {
     public String type;
     public int year;
     public String image;
+
+    /*@ManyToMany(mappedBy = "authors")
+    public Set<Anime> animes;
+
+    @ManyToMany
+    @JoinTable (name= "anime_author", joinColumns = @JoinColumn(name = "animeid"),inverseJoinColumns = @JoinColumn(name = "authorid"))
+    public Set<Author> authors;
+
+    public interface  ProjectionAuthorWithAnimes{
+        UUID getAuthorid();
+        String getName();
+        @JsonIgnoreProperties("actors")
+        Set<ProjectionAuthorWithAnimes> getMovies();
+    }*/
 
     public UUID getAnimeid() {
         return animeid;
