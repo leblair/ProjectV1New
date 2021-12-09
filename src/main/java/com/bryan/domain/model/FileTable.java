@@ -19,7 +19,4 @@ public class FileTable {
     @Lob//para saber que es un array
     @Type(type="org.hibernate.type.BinaryType")
     public byte[] data;
-
-
-
 }

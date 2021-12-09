@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+@Entity
+@Table(name="author")
 public class Author {
 
     @Id
@@ -15,18 +17,8 @@ public class Author {
     public String name;
     public String imageurl;
 
-    @ManyToMany(mappedBy = "authors")//relacion n:m
+
+    @ManyToMany(mappedBy = "authors")
+    @JsonIgnoreProperties("authors")
     public Set<Anime> animes;
-
-    @ManyToMany
-    @JoinTable(name= "anime_author", joinColumns = @JoinColumn(name = "animeid"),inverseJoinColumns = @JoinColumn(name = "authorid"))
-    public Set<Author> authors;
-
-    public interface  ProjectionAuthorWithAnimes{
-        UUID getAuthorid();
-        String getName();
-        @JsonIgnoreProperties("actors")
-        Set<ProjectionAuthorWithAnimes> getAnimes();
-
-    }
 }

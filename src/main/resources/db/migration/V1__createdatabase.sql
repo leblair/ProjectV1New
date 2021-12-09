@@ -17,14 +17,22 @@ CREATE TABLE IF NOT EXISTS author(
     name text,
     imageurl text
 );
-
+INSERT INTO author(name,imageurl) VALUES
+    ('Author1', 'imagen1'),
+    ('Author2', 'imagen2');
 
 CREATE TABLE anime_author(
-    anime uuid REFERENCES anime(animeid) ON DELETE CASCADE,
+    animeid uuid REFERENCES anime(animeid) ON DELETE CASCADE,
     authorid uuid REFERENCES author(authorid) ON DELETE CASCADE,
     PRIMARY KEY (animeid,authorid)
-
 );
+
+INSERT INTO anime_author VALUES
+    ((SELECT animeid FROM anime WHERE text='text1'),(SELECT authorid FROM author WHERE name='Author1')),
+    ((SELECT animeid FROM anime WHERE text='text2'),(SELECT authorid FROM author WHERE name='Author2'));
+
+
+
 
 CREATE TABLE IF NOT EXISTS usertable (
     userid uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,

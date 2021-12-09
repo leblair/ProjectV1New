@@ -4,6 +4,7 @@ package com.bryan.domain.dto;
 import java.util.UUID;
 
 public class FilesResult {
+
     public UUID fileid;
     public String contenttype;
 

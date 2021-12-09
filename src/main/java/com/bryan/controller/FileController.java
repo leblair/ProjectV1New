@@ -3,9 +3,8 @@ package com.bryan.controller;
 
 import com.bryan.domain.dto.Error;
 import com.bryan.domain.dto.FilesResult;
-import com.bryan.domain.dto.ResponseFile;
+import com.bryan.domain.dto.ResponseList;
 import com.bryan.domain.model.FileTable;
-import com.bryan.domain.model.User;
 import com.bryan.repository.FileRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -30,10 +28,10 @@ public class FileController {
     }
 
     @GetMapping("/")
-    public ResponseFile filesTable(){
+    public ResponseList filesTable(){
 
 
-        return new ResponseFile(fileRepository.findBy()) ;
+        return new ResponseList(fileRepository.findBy()) ;
     }
     //para hacer proyecciones select fileid,content
 

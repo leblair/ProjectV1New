@@ -1,16 +1,13 @@
 package com.bryan.controller;
 
 import com.bryan.domain.dto.Error;
-import com.bryan.domain.dto.ResponseAnime;
+import com.bryan.domain.dto.ResponseList;
 import com.bryan.domain.model.Anime;
-import org.aspectj.bridge.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bryan.repository.AnimeRepository;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,8 +21,8 @@ public class AnimeController {
     }
 //hacer proyeccion para evitar un bucle entre atributos
     @GetMapping("/")
-    public ResponseAnime showAnimejson(){
-        return new ResponseAnime(animeRepository.findAll());
+    public ResponseList showAnimejson(){
+        return new ResponseList(animeRepository.findAll());
     }
 /*
     @GetMapping("/")
@@ -35,21 +32,24 @@ public class AnimeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getIndividualAnime(@PathVariable UUID id){
-        Anime file = animeRepository.findById(id).orElse(null);
+        Anime anime = animeRepository.findById(id).orElse(null);
 
-        if(file==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Error.message("No s'ha trobat l'anime amb ID: " + id));
-        return ResponseEntity.ok().body(file);
+        if(anime==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Error.message("No s'ha trobat l'anime amb ID: " + id));
+        return ResponseEntity.ok().body(anime);
     }
 
+//dynamic projections
 
+    //<T> List <T> findy(Class<T> type); en repository
+    //en el controller va findby(ProjectionAnime.class);
     @PostMapping("/")
     public ResponseEntity<?> createAnime(@RequestBody Anime anime)
     {
         for(Anime a : animeRepository.findAll()){
-            if(a.getDescription().equals(anime.getDescription())){
+            if(a.description.equals(anime.description)){
                 //409
                 return ResponseEntity.status(HttpStatus.CONFLICT)
-                        .body(Error.message("Ja existeix un anime amb el nom '" + anime.getText() + "'"));
+                        .body(Error.message("Ja existeix un anime amb el nom '" + anime.text + "'"));
             }
         }
         return ResponseEntity.ok().body(animeRepository.save(anime));

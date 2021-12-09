@@ -4,11 +4,11 @@ import com.bryan.domain.model.Anime;
 
 import java.util.List;
 
-public class ResponseAnime {
+public class ResponseList {
 
-    public List<Anime> result;
+    public List<?> result;
 
-    public ResponseAnime(List<Anime> result) {
+    public ResponseList(List<?> result) {
         this.result = result;
     }
 }

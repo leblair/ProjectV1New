@@ -1,10 +1,9 @@
 package com.bryan.controller;
 
 import com.bryan.domain.dto.Error;
-import com.bryan.domain.dto.ResponseUser;
+import com.bryan.domain.dto.ResponseList;
 import com.bryan.domain.dto.UserRegisterRequest;
 import com.bryan.domain.dto.UserResult;
-import com.bryan.domain.model.Anime;
 import com.bryan.domain.model.User;
 import com.bryan.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public ResponseUser usersList(){
-        return new ResponseUser(userRepository.findBy());
+    public ResponseList usersList(){
+        return new ResponseList(userRepository.findBy());
     }
 
     /*/
