@@ -7,7 +7,8 @@ import java.util.UUID;
 
 public interface  ProjectionAuthorWithAnimes{
     UUID getAuthorid();
-    String getNAm();
+    String getName();
+    String getImage();
     @JsonIgnoreProperties("authors")
     Set<ProjectionFindbyAuthorAnime> getAnimes();
 

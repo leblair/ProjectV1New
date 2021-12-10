@@ -8,9 +8,9 @@ import java.util.UUID;
 public interface ProjectionFindbyAuthorAnime {
 
     UUID getAnimeid();
-    String ga();
+    String getTitle();
     String getImage();
 
     @JsonIgnoreProperties("animes")
-    Set<ProjectionFindbyAuthorAnime> getAuthors();
+    Set<ProjectionAuthorWithAnimes> getAuthors();
 }

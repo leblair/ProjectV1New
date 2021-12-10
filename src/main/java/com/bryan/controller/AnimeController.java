@@ -49,7 +49,7 @@ public class AnimeController {
             if(a.description.equals(anime.description)){
                 //409
                 return ResponseEntity.status(HttpStatus.CONFLICT)
-                        .body(Error.message("Ja existeix un anime amb el nom '" + anime.text + "'"));
+                        .body(Error.message("Ja existeix un anime amb el nom '" + anime.title + "'"));
             }
         }
         return ResponseEntity.ok().body(animeRepository.save(anime));

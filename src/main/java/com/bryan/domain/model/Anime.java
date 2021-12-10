@@ -14,15 +14,13 @@ public class Anime {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public UUID animeid;
 
-    public String text;
+    public String title;
     public String description;
     public String type;
     public int year;
     public String image;
 
-    @ManyToMany
-    @JoinTable(name= "anime_author", joinColumns = @JoinColumn(name = "authorid"),inverseJoinColumns = @JoinColumn(name = "animeid"))
-
+    @ManyToMany(mappedBy = "animes")//cambiar
     @JsonIgnoreProperties("animes")
     public Set<Author> authors;
 }

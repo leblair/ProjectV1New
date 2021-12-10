@@ -18,7 +18,9 @@ public class Author {
     public String imageurl;
 
 
-    @ManyToMany(mappedBy = "authors")
-    @JsonIgnoreProperties("authors")
+    @ManyToMany
+    @JoinTable(name= "anime_author", joinColumns = @JoinColumn(name = "authorid"),inverseJoinColumns = @JoinColumn(name = "animeid"))
+
+    @JsonIgnoreProperties("authors") //cambiar
     public Set<Anime> animes;
 }
