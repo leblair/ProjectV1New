@@ -18,7 +18,7 @@ public class Genre {
 
     public String label;
 
-    @ManyToMany(mappedBy = "animes")
+    @ManyToMany(mappedBy = "genres")
     public Set<Anime> animes;
     /*@ManyToMany
     @JoinTable(name= "anime_author", joinColumns = @JoinColumn(name = "authorid"),inverseJoinColumns = @JoinColumn(name = "animeid"))
