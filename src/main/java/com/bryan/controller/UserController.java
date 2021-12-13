@@ -1,14 +1,15 @@
 package com.bryan.controller;
 
+import com.bryan.domain.dto.*;
 import com.bryan.domain.dto.Error;
-import com.bryan.domain.dto.ResponseList;
-import com.bryan.domain.dto.UserRegisterRequest;
-import com.bryan.domain.dto.UserResult;
+import com.bryan.domain.model.Favorite;
 import com.bryan.domain.model.User;
+import com.bryan.repository.FavoriteRepository;
 import com.bryan.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +23,15 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired private FavoriteRepository favoriteRe;
+
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @GetMapping("/")
-    public ResponseList usersList(){
-        return new ResponseList(userRepository.findBy());
+    public ResponseEntity<?> usersList(){
+        return ResponseEntity.ok().body(new ResponseList(userRepository.findBy()));
     }
 
     /*/
@@ -55,6 +58,22 @@ public class UserController {
             return ResponseEntity.ok().body(userResult);//OK
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Ja existeix un usuari amb el nom '" + userRegisterRequest.username + "'");
+
+    }
+
+    @PostMapping("/{id}/favorites")
+    public ResponseEntity<?> addFavorite(@RequestBody Favorite favorite, Authentication authentication){
+        ;
+
+        if(userRepository.findByUsername(authentication.getName()).userid.equals(favorite.userid)) {
+
+            favoriteRe.save(favorite);
+            return ResponseEntity.ok().build();
+        }
+        else {
+
+            return  ResponseEntity.ok().body("");
+        }
 
     }
 

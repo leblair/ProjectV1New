@@ -20,7 +20,18 @@ public class Anime {
     public int year;
     public String image;
 
-    @ManyToMany(mappedBy = "animes")//cambiar
+    @ManyToMany//(mappedBy = "animes")//cambiar
     @JsonIgnoreProperties("animes")
     public Set<Author> authors;
+
+    @ManyToMany
+    @JoinTable(name="anime_genre",joinColumns = @JoinColumn(name="animeid"),inverseJoinColumns = @JoinColumn(name="genreid"))
+    public Set<Genre> genres;
+
+    /*@ManyToMany
+    @JoinTable(name= "favorite", joinColumns = @JoinColumn(name = "animeid"),inverseJoinColumns = @JoinColumn(name = "userid"))
+
+//    @JsonIgnoreProperties("authors") //cambiar
+    public Set<User> favoritedby;//marcada fav por el set de usuarios*/
+
 }

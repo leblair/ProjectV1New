@@ -6,28 +6,23 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+
+
 @Entity
-@Table(name="author")
-public class Author {
+@Table(name="genre")
+public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public UUID authorid;
+    public UUID genreid;
 
-    public String name;
-    public String imageurl;
+    public String label;
 
-
-    @ManyToMany
+    @ManyToMany(mappedBy = "animes")
+    public Set<Anime> animes;
+    /*@ManyToMany
     @JoinTable(name= "anime_author", joinColumns = @JoinColumn(name = "authorid"),inverseJoinColumns = @JoinColumn(name = "animeid"))
 
     @JsonIgnoreProperties("authors") //cambiar
-    public Set<Anime> animes;
-
-    @ManyToMany
-    @JoinTable(name= "anime_genre", joinColumns = @JoinColumn(name = "genreid"),inverseJoinColumns = @JoinColumn(name = "animeid"))
-
-//    @JsonIgnoreProperties("authors") //cambiar
-    public Set<Genre> genres;
-
+    public Set<Anime> animes;*/
 }
