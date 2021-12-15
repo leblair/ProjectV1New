@@ -15,7 +15,7 @@ INSERT INTO anime(title,description, type, year, image) VALUES
 CREATE TABLE IF NOT EXISTS author(
     authorid uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     name text,
-    imageurl text,
+    imageurl text
 );
 
 CREATE TABLE IF NOT EXISTS genre(
@@ -96,11 +96,11 @@ INSERT INTO file(contenttype) VALUES
     ('txt'),
     ('txt');
 
-CREATE TABLE favorite{
+CREATE TABLE favorite(
     userid uuid REFERENCES usser(userid) ON DELETE CASCADE,
     animeid uuid REFERENCES anime(animeid) ON DELETE CASCADE,
-    PRIMARY KEY (userid,animeid);
-}
+    PRIMARY KEY (userid,animeid)
+);
 
 INSERT INTO favorite VALUES
     ((select userid from usser where username='user'),(select animeid from anime where title='text1'));

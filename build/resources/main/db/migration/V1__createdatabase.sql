@@ -17,9 +17,31 @@ CREATE TABLE IF NOT EXISTS author(
     name text,
     imageurl text
 );
+
+CREATE TABLE IF NOT EXISTS genre(
+    genreid uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    label text,
+    imageurl text
+);
+INSERT INTO genre(label,imageurl) VALUES
+    ('Genre1', 'imagen1'),
+    ('Genre2', 'imagen2');
+
+
 INSERT INTO author(name,imageurl) VALUES
     ('Author1', 'imagen1'),
     ('Author2', 'imagen2');
+
+CREATE TABLE anime_genre(
+    animeid uuid REFERENCES anime(animeid) ON DELETE CASCADE,
+    genreid uuid REFERENCES genre(genreid) ON DELETE CASCADE,
+    PRIMARY KEY (animeid,genreid)
+);
+
+INSERT INTO anime_genre VALUES
+    ((SELECT animeid FROM anime WHERE title='text1'),(SELECT genreid FROM genre WHERE label='Genre1')),
+    ((SELECT animeid FROM anime WHERE title='text2'),(SELECT genreid FROM genre WHERE label='Genre2'));
+
 
 CREATE TABLE anime_author(
     animeid uuid REFERENCES anime(animeid) ON DELETE CASCADE,
@@ -73,3 +95,12 @@ INSERT INTO file(contenttype) VALUES
     ('image/png'),
     ('txt'),
     ('txt');
+
+CREATE TABLE favorite(
+    userid uuid REFERENCES usser(userid) ON DELETE CASCADE,
+    animeid uuid REFERENCES anime(animeid) ON DELETE CASCADE,
+    PRIMARY KEY (userid,animeid)
+);
+
+INSERT INTO favorite VALUES
+    ((select userid from usser where username='user'),(select animeid from anime where title='text1'));

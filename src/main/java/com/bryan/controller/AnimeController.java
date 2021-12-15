@@ -21,8 +21,9 @@ public class AnimeController {
     }
 //hacer proyeccion para evitar un bucle entre atributos
     @GetMapping("/")
-    public ResponseList showAnimejson(){
-        return new ResponseList(animeRepository.findAll());
+    public ResponseEntity<?> showAnimejson(){
+        return ResponseEntity.ok().body(new ResponseList(animeRepository.findBy())) ;
+
     }
 /*
     @GetMapping("/")
