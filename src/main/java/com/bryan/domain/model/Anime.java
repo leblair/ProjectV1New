@@ -20,13 +20,17 @@ public class Anime {
     public int year;
     public String image;
 
-    @ManyToMany//(mappedBy = "animes")//cambiar
+    @ManyToMany
+    @JoinTable(name = "anime_author",
+            joinColumns = @JoinColumn(name = "animeid"),
+            inverseJoinColumns = @JoinColumn(name = "authorid"))
     @JsonIgnoreProperties("animes")
     public Set<Author> authors;
 
     @ManyToMany
     @JoinTable(name="anime_genre",joinColumns = @JoinColumn(name="animeid"),
             inverseJoinColumns = @JoinColumn(name="genreid"))
+    @JsonIgnoreProperties("animes")
     public Set<Genre> genres;
 
     /*@ManyToMany

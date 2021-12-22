@@ -18,9 +18,4 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     <T> List<T> findByUserid(UUID id, Class<T> type);
 
 }
-/*
 
-public interface UserRepository extends JpaRepository {
-
-    User findByUsername(String username);
-}*/

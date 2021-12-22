@@ -19,17 +19,12 @@ public class AnimeController {
     public AnimeController(AnimeRepository animeRepository) {
         this.animeRepository = animeRepository;
     }
-//hacer proyeccion para evitar un bucle entre atributos
     @GetMapping("/")
     public ResponseEntity<?> showAnimejson(){
-        return ResponseEntity.ok().body(new ResponseList(animeRepository.findBy())) ;
+        return ResponseEntity.ok().body(new ResponseList(animeRepository.findAll())) ;
 
     }
-/*
-    @GetMapping("/")
-    public List<Anime> showAnime(){
-        return animeRepository.findAll();
-    }*/
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getIndividualAnime(@PathVariable UUID id){
@@ -39,10 +34,7 @@ public class AnimeController {
         return ResponseEntity.ok().body(anime);
     }
 
-//dynamic projections
 
-    //<T> List <T> findy(Class<T> type); en repository
-    //en el controller va findby(ProjectionAnime.class);
     @PostMapping("/")
     public ResponseEntity<?> createAnime(@RequestBody Anime anime)
     {

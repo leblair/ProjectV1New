@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-//corresponde a :
 @Table(name="file")
 public class FileTable {
 

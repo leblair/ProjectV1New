@@ -24,10 +24,5 @@ public class Author {
     @JsonIgnoreProperties("authors") //cambiar
     public Set<Anime> animes;
 
-    @ManyToMany
-    @JoinTable(name= "anime_genre", joinColumns = @JoinColumn(name = "genreid"),inverseJoinColumns = @JoinColumn(name = "animeid"))
-
-//    @JsonIgnoreProperties("authors") //cambiar
-    public Set<Genre> genres;
 
 }

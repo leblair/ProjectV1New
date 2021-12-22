@@ -17,12 +17,11 @@ public class Genre {
     public UUID genreid;
 
     public String label;
+    public String imageurl;
 
     @ManyToMany(mappedBy = "genres")
+    @JsonIgnoreProperties("genres")
     public Set<Anime> animes;
-    /*@ManyToMany
-    @JoinTable(name= "anime_author", joinColumns = @JoinColumn(name = "authorid"),inverseJoinColumns = @JoinColumn(name = "animeid"))
 
-    @JsonIgnoreProperties("authors") //cambiar
-    public Set<Anime> animes;*/
+
 }
