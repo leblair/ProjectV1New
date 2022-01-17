@@ -16,7 +16,7 @@ public class User {
     public String role;
     public boolean enabled;
 
-  /*  @ManyToMany(mappedBy = "favoritedBy")
-    public Set<Anime> favorites;*/
+    @ManyToMany(mappedBy = "favoritedby")
+    public Set<Anime> favorites;
 }
 

@@ -11,4 +11,7 @@ public class ResponseList {
     public ResponseList(List<?> result) {
         this.result = result;
     }
+    public static ResponseList list(List<?> result){
+        return new ResponseList(result);
+    }
 }

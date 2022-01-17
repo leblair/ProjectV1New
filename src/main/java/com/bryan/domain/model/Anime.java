@@ -1,5 +1,6 @@
 package com.bryan.domain.model;
 
+import com.bryan.domain.model.projection.ProjectionUser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -33,10 +34,9 @@ public class Anime {
     @JsonIgnoreProperties("animes")
     public Set<Genre> genres;
 
-    /*@ManyToMany
+    @ManyToMany
     @JoinTable(name= "favorite", joinColumns = @JoinColumn(name = "animeid"),inverseJoinColumns = @JoinColumn(name = "userid"))
-
-//    @JsonIgnoreProperties("authors") //cambiar
-    public Set<User> favoritedby;//marcada fav por el set de usuarios*/
+    @JsonIgnoreProperties({"favorites","password","role","enabled"})
+    public Set<User> favoritedby;//marcada fav por el set de usuarios
 
 }

@@ -9,6 +9,7 @@ public interface ProjectionUserAnime {
 
     UUID getAnimeid();
     String getTitle();
+    String getImage();
 
     @JsonIgnoreProperties("favorites")
     Set<ProjectionUser> getFavoritedby();

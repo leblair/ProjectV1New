@@ -4,6 +4,8 @@ import com.bryan.domain.dto.*;
 import com.bryan.domain.dto.Error;
 import com.bryan.domain.model.Favorite;
 import com.bryan.domain.model.User;
+import com.bryan.domain.model.projection.ProjectionUser;
+import com.bryan.domain.model.projection.ProjectionUserFavorites;
 import com.bryan.repository.FavoriteRepository;
 import com.bryan.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,9 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired private UserRepository userRepository;
+
+    @Autowired private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired private FavoriteRepository favoriteRe;
 
@@ -34,19 +36,19 @@ public class UserController {
         return ResponseEntity.ok().body(new ResponseList(userRepository.findBy()));
     }
 
-    /*/
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable UUID id){
         User file = userRepository.findById(id).orElse(null);
 
         if(file==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Error.message("No s'ha trobat l'usuari amb ID: " + id));
-        return ResponseEntity.ok().body(file);
+        return ResponseEntity.ok().body(ResponseList.list(userRepository.findByUserid(id, ProjectionUser.class)));
     }
-*/
 
 
-    @PostMapping("/")
-    public ResponseEntity<?> createUser(@RequestBody UserRegisterRequest userRegisterRequest){
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody UserRegisterRequest userRegisterRequest){
         if (userRepository.findByUsername(userRegisterRequest.username) == null) {
             User userNuevo = new User();
             userNuevo.username = userRegisterRequest.username;
@@ -61,20 +63,45 @@ public class UserController {
 
     }
 
-    @PostMapping("/{id}/favorites")
-    public ResponseEntity<?> addFavorite(@RequestBody Favorite favorite, Authentication authentication){
-        ;
+    @GetMapping("/favorites")
+    public ResponseEntity<?> addFavorite(Authentication authentication) {
 
-        if(userRepository.findByUsername(authentication.getName()).userid.equals(favorite.userid)) {
+        return ResponseEntity.ok().body(userRepository.findByUsername(authentication.getName(), ProjectionUserFavorites.class));
+    }
 
-            favoriteRe.save(favorite);
-            return ResponseEntity.ok().build();
+    @PostMapping("/favorites")
+    public ResponseEntity<?> addFavorite(@RequestBody FavoriteAnime favoriteAnime, Authentication authentication) {
+        if (authentication != null) {
+
+            User aUser = userRepository.findByUsername(authentication.getName());
+
+            if (aUser != null) {
+                Favorite favorite = new Favorite();
+                favorite.animeid = favoriteAnime.animeid;
+                favorite.userid = aUser.userid;
+                favoriteRe.save(favorite);
+                return ResponseEntity.ok().build();
+            }
         }
-        else {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Error.message("No autoritzat"));
+    }
 
-            return  ResponseEntity.ok().body("");
+    @DeleteMapping("/favorites")
+    public ResponseEntity<?> deleteFavorite(@RequestBody FavoriteAnime requestFavorite, Authentication authentication) {
+        if (authentication != null) {
+
+            User aUser = userRepository.findByUsername(authentication.getName());
+
+            if (aUser != null) {
+                Favorite favorite = new Favorite();
+                favorite.animeid = requestFavorite.animeid;
+                favorite.userid = aUser.userid;
+                favoriteRe.delete(favorite);
+                return ResponseEntity.ok().body("S'ha eliminat dels favorits l'anime amd id " + favorite.animeid);
+            }
         }
 
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Error.message("No autoritzat"));
     }
 
     @DeleteMapping("/{id}")
