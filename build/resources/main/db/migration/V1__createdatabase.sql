@@ -102,4 +102,5 @@ CREATE TABLE favorite(
 );
 
 INSERT INTO favorite VALUES
-    ((select userid from usser where username='user'),(select animeid from anime where title='text1'));
+    ((select userid from usser where username='user'),(select animeid from anime where title='text1')),
+    ((select userid from usser where username='user'),(select animeid from anime where title='text4'));
