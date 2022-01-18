@@ -3,6 +3,7 @@ package com.bryan.controller;
 import com.bryan.domain.dto.Error;
 import com.bryan.domain.dto.ResponseList;
 import com.bryan.domain.model.Anime;
+import com.bryan.domain.model.projection.ProjectionAnimeAllFields;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class AnimeController {
     }
     @GetMapping("/")
     public ResponseEntity<?> showAnimejson(){
-        return ResponseEntity.ok().body(new ResponseList(animeRepository.findAll())) ;
+        return ResponseEntity.ok().body(new ResponseList(animeRepository.findBy(ProjectionAnimeAllFields.class))) ;
 
     }
 
