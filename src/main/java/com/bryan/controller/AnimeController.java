@@ -34,6 +34,13 @@ public class AnimeController {
         if(anime==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Error.message("No s'ha trobat l'anime amb ID: " + id));
         return ResponseEntity.ok().body(anime);
     }
+ 
+    @GetMapping("/search/")
+    public ResponseEntity<?> findAnimesBySearch(@RequestBody RequestSearch requestSearch) {
+        List<ProjectionAnimeIdNameImage> animes = animeRepository.findByNameContaining(requestSearch.name, ProjectionAnimeIdNameImage.class);
+
+        return ResponseEntity.ok().body(new ResponseList(animes));
+    }
 
 
     @PostMapping("/")
